@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog</title>
+</head>
+<body>
+    <h1>Simple Blog</h1>
+    <% if (authenticated) { %>
+        <a href="/posts/new">Create New Post</a> <!-- Update the link -->
+        <a href="/logout">Logout</a> <!-- Add the logout button -->
+    <% } else { %>
+        <a href="/login">Login</a> <!-- Add the login button -->
+    <% } %>
+    <hr>
+    <% posts.forEach(post => { %>
+        <h2><a href="/posts/<%= post.id %>"><%= post.title %></a></h2>
+        <p><%= post.content %></p>
+        <hr>
+    <% }); %>
+</body>
+</html>

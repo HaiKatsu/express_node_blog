@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+</head>
+<body>
+    <h1>Edit Post</h1>
+    <form action="/posts/<%= post.id %>?_method=PUT" method="POST"> <!-- Update the action attribute -->
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value="<%= post.title %>" required><br> <!-- Input field for title -->
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content" required><%= post.content %></textarea><br> <!-- Textarea field for content -->
+        <button type="submit">Update Post</button>
+    </form>
+</body>
+</html>
