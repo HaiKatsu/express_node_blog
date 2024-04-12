@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title %></title>
+    <meta name="description" content="< locals.pageDescription >" />
+    <link rel="stylesheet" href="/css/navigation_bar.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div style="margin-bottom: 200px;">
+      <%- include("../header_footer/header") %>
+    </div>
+      <div style="margin-left: 400px; margin-bottom: 100px;">
+        <%- body %>
+      </div>
+      <%- include("../header_footer/footer") %>
+  </body>
+</html>

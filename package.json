@@ -13,11 +13,14 @@
     "bootstrap": "^5.3.3",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.0",
+    "express-ssi": "^2.0.3",
     "method-override": "^3.0.0",
     "mongoose": "^8.3.0",
     "sequelize": "^6.37.2",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "ssi": "^0.3.0"
   },
   "description": ""
 }

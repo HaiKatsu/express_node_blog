@@ -12,8 +12,20 @@ const Post = sequelize.define('Post', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  textPreview: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   content: {
     type: DataTypes.TEXT,
+    allowNull: false
+  },
+  author: {
+    type: DataTypes.STRING,
     allowNull: false
   }
 });

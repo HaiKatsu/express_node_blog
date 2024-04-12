@@ -1,0 +1,8 @@
+<body>
+    <h1>Blog</h1>
+    <% posts.forEach(post => { %>
+        <h2><a href="/posts/<%= post.id %>"><%= post.title %></a></h2>
+        <p>Author: <%= post.author %></p> <!-- Display the author -->
+        <hr>
+    <% }); %>
+</body>

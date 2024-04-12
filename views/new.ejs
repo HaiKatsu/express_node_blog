@@ -1,18 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Post</title>
-</head>
 <body>
     <h1>New Post</h1>
-    <form action="/posts" method="POST"> <!-- Update the action attribute -->
+    <form id="newPostForm" action="/posts" method="POST"> <!-- Update the action attribute -->
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title" required><br> <!-- Input field for title -->
+
+        <label for="textPreview">Text Preview:</label><br>
+        <input type="text" id="textPreview" name="textPreview" required><br> <!-- Input field for title -->
+
+        <label for="image">Image:</label><br>
+        <input type="text" id="image" name="image" required><br> <!-- Input field for title -->
+
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author" required><br> <!-- Input field for author -->
+
         <label for="content">Content:</label><br>
         <textarea id="content" name="content" required></textarea><br> <!-- Textarea field for content -->
-        <button type="submit">Create Post</button>
+
+        <label for="created_at">Time Created:</label><br>
+        <input type="text" id="created_at" name="created_at" value="<%= new Date().toLocaleString() %>" readonly><br> <!-- Input field for time created -->
+
+        <button type="button" onclick="createPost()">Create Post</button>
     </form>
+
+    <!-- Include CKEditor script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#content'))
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        function createPost() {
+            // Update the textarea with the CKEditor content
+            const contentTextarea = document.querySelector('#content');
+            if (contentTextarea) {
+                contentTextarea.value = window.editor.getData();
+                // Submit the form
+                document.querySelector('#newPostForm').submit();
+            } else {
+                console.error("Textarea with id 'content' not found.");
+            }
+        }
+    </script>
 </body>
-</html>

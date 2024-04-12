@@ -1,0 +1,56 @@
+.intro {
+    margin-bottom: 200px;
+}
+
+.intro h1 {
+    font-weight: bold;
+    font-size: 5rem;
+    margin-left: 100px;
+    margin-bottom: 25px;
+}
+
+.intro p {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-bottom: 75px;
+}
+
+.intro a {
+    color: black; 
+    padding: 14px 16px; 
+    text-decoration: none; 
+    font-size: 17px;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+.intro a:hover {
+    background-color: #ddd; 
+    color: black;
+}
+
+.latest-post {
+    margin-bottom: 200px;
+}
+
+.latest-post h1 {
+    font-weight: bold;
+    font-size: 5rem;
+    margin-bottom: 100px;
+    margin-left: 100px;
+}
+
+.latest-post sub-title {
+    float: right;
+    margin-right: 200px;;
+    margin-top: 20px;
+    font-weight: bold;    
+}
+
+.latest-post post-list {
+    float: right;
+    color: red;
+    margin-right: 7rem;;
+    margin-top: 0px;    
+}

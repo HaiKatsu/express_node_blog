@@ -1,23 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Blog</title>
-</head>
 <body>
-    <h1>Simple Blog</h1>
-    <% if (authenticated) { %>
-        <a href="/posts/new">Create New Post</a> <!-- Update the link -->
-        <a href="/logout">Logout</a> <!-- Add the logout button -->
-    <% } else { %>
-        <a href="/login">Login</a> <!-- Add the login button -->
-    <% } %>
-    <hr>
-    <% posts.forEach(post => { %>
-        <h2><a href="/posts/<%= post.id %>"><%= post.title %></a></h2>
-        <p><%= post.content %></p>
-        <hr>
-    <% }); %>
+    <div class="intro">
+        <h1>Introduction</h1>
+
+        <div class="row">
+            <div class="col-md-4" style="text-align: center;">
+                <p> Our Wild World is full of great facts, I have tried to keep it as accessible to a wider 
+                audience as possible – it is not meant to be an exhaustive resource on every species. 
+                Though I have a deep knowledge of the principles of animal behaviour and of many domestic 
+                species, I am by no means an expert on all wildlife. I highly encourage you to research 
+                species of interest on your own if you are interested in learning more about a particular animal.</p>
+
+                <a href="/about">About us</a>
+            </div>
+            <div class="col-md-8">
+                <img src="/images/intro_picture.jpg" alt="intro picture" style="width: 50%;">
+            </div>
+        </div>
+          
+    </div>
+    
+    <div class="latest-post">
+        <sub-title>Check out our newest post to stay up to date with all of our latest news and updates! </sub-title></sub-title>
+        <h1>Latest posts</h1>
+
+        <% posts.forEach(post => { %>
+            <a href="/posts/<%= post.id %>" style="text-decoration: none; color: black">
+                <div class="card">
+                    <img src="https://www.rocketleague.com/_next/image?url=https%3A%2F%2Fmedia.graphassets.com%2Fresize%3Dfit%3Aclip%2Cheight%3A1080%2Cwidth%3A1920%2Foutput%3Dformat%3Awebp%2FIgQn94ZRvSrP27RDt6HR&w=1920&q=75" class="card-img-top" alt="Card Image">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold;"><%= post.title %></h5>
+                        <p class="card-text"><%= post.author %></p>
+                        <p class="card-text" style="float:right; margin-right: 10px; margin-top: 55px"><%= dates[0] %></p>
+                    </div>
+                </div>
+            </a>
+        <% }); %>        
+    </div>
+    <a href="/posts/new">Create New Post</a>
+
 </body>
-</html>
+
+<style>
+    .card {
+        width: 350px;
+        height: 400px;
+        max-width: 400px;
+        background-color: red;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-left: 100px;
+        text-align: center;
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: 250px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+      }
+</style>

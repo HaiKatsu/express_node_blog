@@ -1,18 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Post</title>
-</head>
 <body>
     <h1>Edit Post</h1>
-    <form action="/posts/<%= post.id %>?_method=PUT" method="POST"> <!-- Update the action attribute -->
+    <form id="editForm" action="/posts/<%= post.id %>?_method=PUT" method="POST"> <!-- Update the action attribute -->
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title" value="<%= post.title %>" required><br> <!-- Input field for title -->
         <label for="content">Content:</label><br>
-        <textarea id="content" name="content" required><%= post.content %></textarea><br> <!-- Textarea field for content -->
-        <button type="submit">Update Post</button>
+        <!-- Replace the textarea with a div to hold CKEditor -->
+        <div id="editor"><%- post.content %></div><br> 
+        <!-- Add a hidden textarea to hold the CKEditor content -->
+        <textarea id="content" name="content" style="display: none;"></textarea>
+        <button type="button" onclick="updatePost()">Update Post</button>
     </form>
+
+    <!-- Initialize CKEditor -->
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        function updatePost() {
+            // Update the textarea with the CKEditor content
+            const contentTextarea = document.querySelector('#content');
+            if (contentTextarea) {
+                contentTextarea.value = window.editor.getData();
+                // Submit the form
+                document.querySelector('#editForm').submit();
+            } else {
+                console.error("Textarea with id 'content' not found.");
+            }
+        }
+    </script>
 </body>
-</html>
