@@ -34,7 +34,8 @@ app.get('/', async (req, res) => {
         authenticated: req.session.isAuthenticated, 
         posts: posts,
         dates: dates,
-        title: 'Home'
+        title: 'Home',
+        action: 'home'
     });
 });
 
@@ -43,14 +44,16 @@ app.get('/', async (req, res) => {
 app.get('/posts/new', (req, res) => {
   res.render('new', {
     authenticated: req.session.isAuthenticated, 
-    title: "Create post"
+    title: "Create post",
+    action: 'create'
   })
 });
 
 // Create Post Route
 app.post('/posts', async (req, res) => {
   await Post.create(req.body);
-  res.redirect('/');
+  const lastPost = await Post.findOne({ order: [['id', 'DESC']] });
+  res.redirect(`/posts/${lastPost.id}`);
 });
 
 // Route to render post details
@@ -62,7 +65,8 @@ app.get('/posts/:id', async (req, res) => {
   res.render('show', { 
       authenticated: req.session.isAuthenticated, 
       post: post,
-      title: post.title
+      title: post.title,
+      action: 'show'
   });
 });
 
@@ -73,7 +77,8 @@ app.get('/posts/:id/edit', async (req, res) => {
     res.render('edit', {
       authenticated: req.session.isAuthenticated,
       post,
-      title: "Edit" +  post.title,
+      title: "Edit",
+      action: 'edit'
     });
   }
 });
@@ -96,7 +101,8 @@ app.get('/login', (req, res) => {
   res.render('login', 
       { 
           authenticated: req.session.isAuthenticated, 
-          title: 'Login', 
+          title: 'Login',
+          action: 'login'
       });
 });
 
@@ -136,14 +142,16 @@ app.get('/blog', async (req, res) => {
   res.render('blog', { 
       authenticated: req.session.isAuthenticated, 
       posts: posts,
-      title: 'Blog'
+      title: 'Blog',
+      action: 'blog'
   });
 });
 
 app.get('/about', async (req, res) => {
   res.render('about', {
       authenticated: req.session.isAuthenticated,
-      title: 'About'
+      title: 'About',
+      action: 'about'
   });
 });
 

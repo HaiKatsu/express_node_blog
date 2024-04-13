@@ -1,7 +1,9 @@
-<body>
-    <h1><%= post.title %></h1>
-    <!-- Use <%- %> to render content as HTML -->
-    <%- post.content %>
+<div style="max-width: 1500px; margin: 0 auto; text-align:center; margin-bottom: 100px">
+    <img src="<%= post.image %>" alt="Post Image" style="max-width: 100%; margin: 0 auto; display: block;">
+    <h1 style="font-weight: bold;"><%= post.title %></h1>
+    <div style="overflow-x: auto; text-align: left;"> <!-- Align list items to the left -->
+        <%- post.content %>
+    </div>
     
     <% if (authenticated) { %>
         <a href="/posts/<%= post.id %>/edit">Edit</a>
@@ -12,4 +14,11 @@
     <% } %>
     
     <a href="/">Back to Home</a>
-</body>
+</div>
+
+<style>
+    img {
+        max-width: 75%; /* Ensure images don't exceed their container width */
+        height: auto; /* Maintain aspect ratio */
+    }
+</style>

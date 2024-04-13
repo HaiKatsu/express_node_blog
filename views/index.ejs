@@ -24,16 +24,20 @@
         <h1>Latest posts</h1>
 
         <% posts.forEach(post => { %>
-            <a href="/posts/<%= post.id %>" style="text-decoration: none; color: black">
                 <div class="card">
-                    <img src="https://www.rocketleague.com/_next/image?url=https%3A%2F%2Fmedia.graphassets.com%2Fresize%3Dfit%3Aclip%2Cheight%3A1080%2Cwidth%3A1920%2Foutput%3Dformat%3Awebp%2FIgQn94ZRvSrP27RDt6HR&w=1920&q=75" class="card-img-top" alt="Card Image">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-weight: bold;"><%= post.title %></h5>
-                        <p class="card-text"><%= post.author %></p>
-                        <p class="card-text" style="float:right; margin-right: 10px; margin-top: 55px"><%= dates[0] %></p>
-                    </div>
+                    <a href="/posts/<%= post.id %>" style="text-decoration: none; color: black">
+                        <img src="<%= post.image %>"" class="card-img-top" alt="Card Image">
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title" style="font-weight: bold;"><%= post.title %></h5>
+                            </div>
+                            <div style="height: 200px; display: flex; justify-content: center; align-items: center;">
+                                <p class="card-text" style="width: 75%; margin: 0 auto; text-align: center;"><%= post.textPreview %></p>
+                            </div>
+                            
+                        </div>
+                    </a>
                 </div>
-            </a>
         <% }); %>        
     </div>
     <a href="/posts/new">Create New Post</a>
@@ -43,13 +47,14 @@
 <style>
     .card {
         width: 350px;
-        height: 400px;
+        height: 500px;
         max-width: 400px;
-        background-color: red;
+        background-color: white;
         border-radius: 15px;
         overflow: hidden;
         margin-left: 100px;
         text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 1);
       }
 
       .card-img-top {

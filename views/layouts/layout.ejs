@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   </head>
   <body>
-    <div style="margin-bottom: 200px;">
+    <div style="margin-bottom: 100px;">
       <%- include("../header_footer/header") %>
     </div>
-      <div style="margin-left: 400px; margin-bottom: 100px;">
+    <% if (action == "show" || action == "edit" || action =="create") { %>
+      <div>
+        <% } else { %>
+      <div style="margin-left: 400px;">
+        <% } %>
         <%- body %>
       </div>
       <%- include("../header_footer/footer") %>

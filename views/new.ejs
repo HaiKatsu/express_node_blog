@@ -1,26 +1,31 @@
 <body>
-    <h1>New Post</h1>
-    <form id="newPostForm" action="/posts" method="POST"> <!-- Update the action attribute -->
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" required><br> <!-- Input field for title -->
 
-        <label for="textPreview">Text Preview:</label><br>
-        <input type="text" id="textPreview" name="textPreview" required><br> <!-- Input field for title -->
+    <p id="title_label" name="title_label" style="position: absolute; margin-left: 100px; font-weight:bold; font-size: 2rem">Title</p>
+    <p id="preview_label" name="preview_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Text preview</p>
+    <p id="image_label" name="image_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Image URL</p>
+    <p id="author_label" name="author_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Author</p>
+    <p id="content_label" name="content_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Post content</p>
 
-        <label for="image">Image:</label><br>
-        <input type="text" id="image" name="image" required><br> <!-- Input field for title -->
+    <h1 style="margin-left: 200px; margin-bottom: 50px; font-weight:bold;">New Post</h1>
+    <div style="max-width: 1500px; margin: 0 auto; text-align:center; margin-bottom:100px">
+        <form id="newPostForm" action="/posts" method="POST"> <!-- Update the action attribute -->
+            <img id="miniature_picture" src="" alt="Miniature picture please fill the image url field" style="max-width: 100%; margin: 0 auto; display: block; margin-bottom: 50px">
 
-        <label for="author">Author:</label><br>
-        <input type="text" id="author" name="author" required><br> <!-- Input field for author -->
+            <textarea id="title" name="title" required style="width: 100%; border: 1px solid black; font-size: 3.5rem; text-align:center; font-weight:bold; margin-bottom: 50px"></textarea>
 
-        <label for="content">Content:</label><br>
-        <textarea id="content" name="content" required></textarea><br> <!-- Textarea field for content -->
+            <textarea id="textPreview" name="textPreview" required maxlength="360" style="width: 100%; border: 1px solid black; font-size: 2rem; text-align:center; font-weight:bold; margin-bottom: 50px"></textarea>
 
-        <label for="created_at">Time Created:</label><br>
-        <input type="text" id="created_at" name="created_at" value="<%= new Date().toLocaleString() %>" readonly><br> <!-- Input field for time created -->
+            <textarea id="image" name="image" required style="width: 100%; border: 1px solid black; font-size: 2rem; text-align:center; font-weight:bold; margin-bottom: 50px"></textarea>
 
-        <button type="button" onclick="createPost()">Create Post</button>
-    </form>
+            <textarea id="author" name="author" required style="width: 100%; border: 1px solid black; font-size: 2rem; text-align:center; font-weight:bold; margin-bottom: 50px"></textarea>
+            
+            <textarea id="content" name="content" required style></textarea>
+
+            <input type="text" id="created_at" name="created_at" value="<%= new Date().toLocaleString() %>" readonly hidden><br> <!-- Input field for time created -->
+
+            <button type="button" onclick="createPost()">Create Post</button>
+        </form>
+    </div>
 
     <!-- Include CKEditor script -->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
@@ -46,5 +51,45 @@
                 console.error("Textarea with id 'content' not found.");
             }
         }
+
+        function adjustTextareaHeight() {
+            const textarea = document.querySelector('#title');
+            textarea.style.height = '90px'; // Reset height to allow resizing
+            textarea.style.height = Math.min(textarea.scrollHeight, 1000) + 'px'; // Set height based on content, max height is 300px
+        }
+
+        function adjustLabelsPosition() {
+            const titleTextArea = document.querySelector('#title');
+            const previewTextArea = document.querySelector('#textPreview');
+            const previewLabel = document.querySelector('#preview_label');
+            const titleLabel = document.querySelector('#title_label');
+            const imageTextArea = document.querySelector('#image');
+            const imageLabel = document.querySelector('#image_label');
+            const miniaturePicture = document.querySelector('#miniature_picture');
+            const authorTextArea = document.querySelector('#author');
+            const authorLabel = document.querySelector('#author_label');
+            const contentLabel = document.querySelector('#content_label');
+            miniaturePicture.setAttribute('src', imageTextArea.value);
+            miniaturePicture.style.display = imageTextArea.value ? 'block' : 'none';
+            
+            const titleTopPosition = titleTextArea.offsetTop + (titleTextArea.offsetHeight - titleLabel.offsetHeight) / 2;
+            const previewTopPosition = previewTextArea.offsetTop + (previewTextArea.offsetHeight - previewLabel.offsetHeight) / 2;
+            const imageTopPosition = imageTextArea.offsetTop + (imageTextArea.offsetHeight - imageLabel.offsetHeight) / 2;
+            const authorTopPosition = authorTextArea.offsetTop + (authorTextArea.offsetHeight - authorLabel.offsetHeight) / 2;
+            
+            // Set the calculated top position
+            titleLabel.style.top = titleTopPosition + 'px';
+            previewLabel.style.top = previewTopPosition + 'px';
+            imageLabel.style.top = imageTopPosition + 'px';
+            authorLabel.style.top = authorTopPosition + 'px';
+            contentLabel.style.top = authorTopPosition + 125 + 'px';
+            
+        }
+
+        window.onload = adjustTextareaHeight;
+        window.onload = adjustLabelsPosition;
+        document.querySelector('#title').addEventListener('input', adjustTextareaHeight);
+        document.querySelector('#image').addEventListener('input', adjustLabelsPosition);
+
     </script>
 </body>

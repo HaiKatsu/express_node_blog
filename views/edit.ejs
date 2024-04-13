@@ -1,20 +1,31 @@
 <body>
-    <h1>Edit Post</h1>
-    <form id="editForm" action="/posts/<%= post.id %>?_method=PUT" method="POST"> <!-- Update the action attribute -->
-        <label for="title">Title:</label><br>
-        <input type="text" id="title" name="title" value="<%= post.title %>" required><br> <!-- Input field for title -->
-        <label for="content">Content:</label><br>
-        <!-- Replace the textarea with a div to hold CKEditor -->
-        <div id="editor"><%- post.content %></div><br> 
-        <!-- Add a hidden textarea to hold the CKEditor content -->
-        <textarea id="content" name="content" style="display: none;"></textarea>
-        <button type="button" onclick="updatePost()">Update Post</button>
-    </form>
+    <p id="title_label" name="title_label" style="position: absolute; margin-left: 100px; font-weight:bold; font-size: 2rem">Title</p>
+    <p id="content_label" name="content_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Post content</p>
+    <p id="preview_label" name="preview_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Text preview</p>
+    <p id="image_label" name="image_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Image URL</p>
+
+    <h1 style="margin-left: 200px; margin-bottom: 50px; font-weight:bold;">Edit Post</h1>
+    <div style="max-width: 1500px; margin: 0 auto; text-align:center; margin-bottom:100px">
+        <img id="miniature_picture" src="<%= post.image %>" alt="Post Image" style="max-width: 100%; margin: 0 auto; display: block; margin-bottom: 50px">
+        <form id="editForm" action="/posts/<%= post.id %>?_method=PUT" method="POST"> <!-- Update the action attribute -->
+            <textarea id="title" name="title" required style="width: 100%; border: 1px solid black; font-size: 3.5rem; text-align:center; font-weight:bold; margin-bottom: 50px"><%= post.title %></textarea>
+
+            <textarea id="textPreview" name="textPreview" required maxlength="360" style="width: 100%; border: 1px solid black; font-size: 2rem; text-align:center; font-weight:bold; margin-bottom: 50px"><%= post.textPreview%></textarea>
+
+            <textarea id="image" name="image" required style="width: 100%; border: 1px solid black; font-size: 2rem; text-align:center; font-weight:bold; margin-bottom: 50px"><%= post.image%></textarea>
+
+            <!-- Replace the textarea with a div to hold CKEditor -->
+            <textarea id="content" name="content" style="display: none;"><%- post.content %></textarea>
+            <!-- Add a hidden textarea to hold the CKEditor content -->
+            <button type="button" onclick="updatePost()" style="position: fixed; bottom: 20px; right: 50px;">Update Post</button>
+        </form>
+    </div>
 
     <!-- Initialize CKEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
-            .create(document.querySelector('#editor'))
+            .create(document.querySelector('#content'))
             .then(editor => {
                 window.editor = editor;
             })
@@ -22,10 +33,48 @@
                 console.error(error);
             });
 
+        // Function to adjust textarea height based on content
+        function adjustTextareaHeight() {
+            const textarea = document.querySelector('#title');
+            textarea.style.height = '90px'; // Reset height to allow resizing
+            textarea.style.height = Math.min(textarea.scrollHeight, 1000) + 'px'; // Set height based on content, max height is 300px
+        }
+
+        function adjustLabelsPosition() {
+            const titleTextArea = document.querySelector('#title');
+            const previewTextArea = document.querySelector('#textPreview');
+            const previewLabel = document.querySelector('#preview_label');
+            const titleLabel = document.querySelector('#title_label');
+            const imageTextArea = document.querySelector('#image');
+            const imageLabel = document.querySelector('#image_label');
+            const contentLabel = document.querySelector('#content_label');
+            const miniaturePicture = document.querySelector('#miniature_picture');
+            
+            const titleTopPosition = titleTextArea.offsetTop + (titleTextArea.offsetHeight - titleLabel.offsetHeight) / 2;
+            const previewTopPosition = previewTextArea.offsetTop + (previewTextArea.offsetHeight - previewLabel.offsetHeight) / 2;
+            const imageTopPosition = imageTextArea.offsetTop + (imageTextArea.offsetHeight - imageLabel.offsetHeight) / 2;
+    
+            // Set the calculated top position
+            titleLabel.style.top = titleTopPosition + 'px';
+            previewLabel.style.top = previewTopPosition + 'px';
+            imageLabel.style.top = imageTopPosition + 'px';
+            contentLabel.style.top = imageTopPosition + 125 + 'px';
+
+            miniaturePicture.setAttribute('src', imageTextArea.value);
+        }
+        
+
+        // Call adjustTextareaHeight when the page loads and whenever the content changes
+        window.onload = adjustTextareaHeight;
+        window.onload = adjustLabelsPosition;
+        document.querySelector('#title').addEventListener('input', adjustTextareaHeight);
+        document.querySelector('#image').addEventListener('input', adjustLabelsPosition);
+
         function updatePost() {
             // Update the textarea with the CKEditor content
             const contentTextarea = document.querySelector('#content');
             if (contentTextarea) {
+                contentTextarea.style.display = 'block'; // Make the textarea visible
                 contentTextarea.value = window.editor.getData();
                 // Submit the form
                 document.querySelector('#editForm').submit();
