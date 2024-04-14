@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/home.css" /><body>
-    <div class="intro">
+    <div class="intro" style="margin-left: 400px; overflow: hidden;">
         <h1>Introduction</h1>
-
+    
         <div class="row">
             <div class="col-md-4" style="text-align: center;">
                 <p> Our Wild World is full of great facts, I have tried to keep it as accessible to a wider 
@@ -9,42 +9,52 @@
                 Though I have a deep knowledge of the principles of animal behaviour and of many domestic 
                 species, I am by no means an expert on all wildlife. I highly encourage you to research 
                 species of interest on your own if you are interested in learning more about a particular animal.</p>
-
+    
                 <a href="/about">About us</a>
+                <br>
+                <br>
             </div>
             <div class="col-md-8">
                 <img src="/images/intro_picture.jpg" alt="intro picture" style="width: 50%;">
             </div>
-        </div>
-          
+        </div>  
     </div>
     
+    
     <div class="latest-post">
-        <sub-title>Check out our newest post to stay up to date with all of our latest news and updates! </sub-title></sub-title>
+        <sub-title>Check out our newest post to stay up to date with all of our latest news and updates! </sub-title>
         <h1>Latest posts</h1>
-
+    </div>
+        
+    <div class="card-container" style="margin-bottom: 100px">
         <% posts.forEach(post => { %>
-                <div class="card">
-                    <a href="/posts/<%= post.id %>" style="text-decoration: none; color: black">
-                        <img src="<%= post.image %>"" class="card-img-top" alt="Card Image">
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title" style="font-weight: bold;"><%= post.title %></h5>
-                            </div>
-                            <div style="height: 200px; display: flex; justify-content: center; align-items: center;">
-                                <p class="card-text" style="width: 75%; margin: 0 auto; text-align: center;"><%= post.textPreview %></p>
-                            </div>
-                            
+            <div class="card">
+                <a href="/posts/<%= post.id %>" style="text-decoration: none; color: black">
+                    <img src="<%= post.image %>" class="card-img-top" alt="Card Image">
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title" style="font-weight: bold;"><%= post.title %></h5>
                         </div>
-                    </a>
-                </div>
-        <% }); %>        
+                        <div style="height: 200px; display: flex; justify-content: center; align-items: center;">
+                            <p class="card-text" style="width: 75%; margin: 0 auto; text-align: center;"><%= post.textPreview %></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% }); %>
     </div>
     <a href="/posts/new">Create New Post</a>
-
+    
+    
 </body>
 
 <style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center remaining cards on the last row */
+    }
+    
     .card {
         width: 350px;
         height: 500px;
@@ -52,15 +62,16 @@
         background-color: white;
         border-radius: 15px;
         overflow: hidden;
-        margin-left: 100px;
+        margin: 0 10px 50px 10px; /* Adjust margin as needed */
         text-align: center;
         box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-      }
-
-      .card-img-top {
+    }
+    
+    .card-img-top {
         width: 100%;
         height: 250px;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
-      }
+    }
+    
 </style>

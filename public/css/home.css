@@ -31,7 +31,8 @@
 }
 
 .latest-post {
-    margin-bottom: 200px;
+    margin-bottom: 100px;
+    margin-left: 200px;
 }
 
 .latest-post h1 {
@@ -43,9 +44,9 @@
 
 .latest-post sub-title {
     float: right;
-    margin-right: 200px;;
+    margin-right: 400px;;
     margin-top: 20px;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 .latest-post post-list {
