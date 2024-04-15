@@ -23,7 +23,9 @@
 
             <input type="text" id="created_at" name="created_at" value="<%= new Date().toLocaleString() %>" readonly hidden><br> <!-- Input field for time created -->
 
-            <button type="button" onclick="createPost()">Create Post</button>
+            <button class="btn" type="submit" onclick="createPost()"">
+                <span style="font-weight: bold;">Create post</span>
+            </button>
         </form>
     </div>
 
@@ -41,6 +43,7 @@
             });
 
         function createPost() {
+            console.log("AHHHHHH");
             // Update the textarea with the CKEditor content
             const contentTextarea = document.querySelector('#content');
             if (contentTextarea) {
@@ -48,6 +51,7 @@
                 // Submit the form
                 document.querySelector('#newPostForm').submit();
             } else {
+                console.log("ZZZZZZZZZ");
                 console.error("Textarea with id 'content' not found.");
             }
         }

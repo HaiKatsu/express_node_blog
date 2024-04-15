@@ -1,0 +1,31 @@
+<body>
+    <form action="/dashboard" method="GET">
+        <button class="btn" type="submit" style="position: fixed; top: calc(500px + 20px); left: 75px;">
+            <span style="font-weight: bold; font-size:30px">Manage posts</span>
+        </button>
+    </form>
+
+    <form action="/dashboard/users" method="GET">
+        <button class="btn" type="submit" style="position: fixed; top: calc(650px + 20px); left: 75px;">
+            <span style="font-weight: bold; font-size:30px">Manage users</span>
+        </button>
+    </form>
+
+    <h1 style="margin-bottom: 50px; margin-left:30px; font-weight:bold">Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.email %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    
+
+</body>

@@ -1,19 +1,17 @@
+<link rel="stylesheet" href="/css/button.css">
+
+<a id="scrollButton" href="#topNav">
+    <button class="btn" type="submit" style="position: fixed; top: calc(800px + 20px); right: 75px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+    </button>
+</a>
+
 <div style="max-width: 1500px; margin: 0 auto; text-align:center; margin-bottom: 100px">
     <img src="<%= post.image %>" alt="Post Image" style="max-width: 100%; margin: 0 auto; display: block;">
     <h1 style="font-weight: bold;"><%= post.title %></h1>
     <div style="overflow-x: auto; text-align: left;"> <!-- Align list items to the left -->
         <%- post.content %>
     </div>
-    
-    <% if (authenticated) { %>
-        <a href="/posts/<%= post.id %>/edit">Edit</a>
-        <form action="/posts/<%= post.id %>" method="POST" style="display:inline;">
-            <input type="hidden" name="_method" value="DELETE">
-            <button type="submit">Delete</button>
-        </form>
-    <% } %>
-    
-    <a href="/">Back to Home</a>
 </div>
 
 <style>
@@ -22,3 +20,16 @@
         height: auto; /* Maintain aspect ratio */
     }
 </style>
+
+<script>
+    function hideButton() {
+        var scrollButton = document.getElementById('scrollButton');
+        if (window.scrollY >= 700) {
+            scrollButton.style.display = 'block';
+        } else {
+            scrollButton.style.display = 'none';
+        }
+    }
+    window.onload = hideButton;
+    window.addEventListener('scroll', hideButton);
+</script>

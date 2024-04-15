@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/button.css">
 <body>
     <p id="title_label" name="title_label" style="position: absolute; margin-left: 100px; font-weight:bold; font-size: 2rem">Title</p>
     <p id="content_label" name="content_label" style="position: absolute; margin-left: 50px; font-weight:bold; font-size: 2rem">Post content</p>
@@ -17,7 +18,11 @@
             <!-- Replace the textarea with a div to hold CKEditor -->
             <textarea id="content" name="content" style="display: none;"><%- post.content %></textarea>
             <!-- Add a hidden textarea to hold the CKEditor content -->
-            <button type="button" onclick="updatePost()" style="position: fixed; bottom: 20px; right: 50px;">Update Post</button>
+
+            <button class="btn" type="button" onclick="updatePost()" style="position: fixed; bottom: 20px; right: 50px;">
+                <span style="font-weight: bold;">Update post</span>
+            </button>
+
         </form>
     </div>
 

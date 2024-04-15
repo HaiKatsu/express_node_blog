@@ -1,16 +1,43 @@
-<div class="topnav">
-    <div style='margin-right: 275px'>
+<link rel="stylesheet" href="/css/button.css" />
+<div id="topNav" class="topnav">
+  <div style='margin-right: 275px'>
     <% if (authenticated) { %>
-      <a href="/logout">Logout</a>
-      <% } else { %>
-        <a href="/login">Login</a>
-        <% } %>
-        <a href="/about">About us</a>
-        <a href="/blog">Blog</a>
-        <a class="active" href="/">Home</a>
-      </div>
-      <div>
-        <h2>RLeague News</h2>
-        <hr>
-    </div>
+      <form action="/logout" method="GET">
+        <button class="navBtn" type="submit">
+          <span style="font-weight: bold;">Logout</span>
+        </button>
+      </form>
+    <% } else { %>
+      <form action="/login" method="GET">
+        <button class="navBtn" type="submit">
+          <span style="font-weight: bold;">Login</span>
+        </button>
+      </form>
+    <% } %>
+    <form action="/about" method="GET">
+      <button class="navBtn" type="submit">
+        <span style="font-weight: bold;">About us</span>
+      </button>
+    </form>
+    <form action="/blog" method="GET">
+      <button class="navBtn" type="submit">
+        <span style="font-weight: bold;">Blog</span>
+      </button>
+    </form>
+    <form action="/" method="GET">
+      <button class="navBtn" type="submit">
+        <span style="font-weight: bold;">Home</span>
+      </button>
+    </form>
+    <% if (admin) { %>
+      <form action="/dashboard" method="GET">
+        <button class="navBtn" type="submit">
+          <span style="font-weight: bold;">Dashboard</span>
+        </button>
+      </form>
+    <% } %>
+  </div>
+  <div>
+    <h2>RLeague News</h2>
+  </div>
 </div>

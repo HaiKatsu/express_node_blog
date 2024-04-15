@@ -25,6 +25,7 @@ app.set('layout', 'layouts/layout');
 
 require ('./routes/posts')(app, session, User, Post, Comment)
 require ('./routes/connection')(app, session, User, Post)
+require ('./routes/dashboard')(app, session, User, Post, Comment)
 
 // Index Route
 // Route to render index page
@@ -47,6 +48,7 @@ app.get('/blog', async (req, res) => {
 
   res.render('blog', { 
       authenticated: req.session.isAuthenticated, 
+      admin: req.session.admin,
       posts: posts,
       title: 'Blog',
       action: 'blog'
@@ -56,6 +58,7 @@ app.get('/blog', async (req, res) => {
 app.get('/about', async (req, res) => {
   res.render('about', {
       authenticated: req.session.isAuthenticated,
+      admin: req.session.admin,
       title: 'About',
       action: 'about'
   });

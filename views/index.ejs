@@ -1,4 +1,6 @@
-<link rel="stylesheet" href="/css/home.css" /><body>
+<link rel="stylesheet" href="/css/home.css"/>
+<link rel="stylesheet" href="/css/button.css" />
+<body>
     <div class="intro" style="margin-left: 400px; overflow: hidden;">
         <h1>Introduction</h1>
     
@@ -10,7 +12,14 @@
                 species, I am by no means an expert on all wildlife. I highly encourage you to research 
                 species of interest on your own if you are interested in learning more about a particular animal.</p>
     
-                <a href="/about">About us</a>
+                <div style="display: flex; justify-content: center;">
+                    <form action="/about" method="GET">
+                        <button class="btn" type="submit">
+                          <span style="font-weight: bold;">About us</span>
+                        </button>
+                    </form>
+                </div>
+
                 <br>
                 <br>
             </div>
@@ -42,10 +51,7 @@
                 </a>
             </div>
         <% }); %>
-    </div>
-    <a href="/posts/new">Create New Post</a>
-    
-    
+    </div>    
 </body>
 
 <style>

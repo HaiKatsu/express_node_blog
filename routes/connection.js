@@ -1,5 +1,3 @@
-const posts = require("./posts");
-
 module.exports = function(app, session, User, Post) { 
     // Route to render login page
     app.get('/login', (req, res) => {
@@ -9,7 +7,8 @@ module.exports = function(app, session, User, Post) {
         else
             res.render('login', 
             { 
-                authenticated: req.session.isAuthenticated, 
+                authenticated: req.session.isAuthenticated,
+                admin: req.session.admin,
                 title: 'Login',
                 action: 'login'
             });
@@ -22,6 +21,7 @@ module.exports = function(app, session, User, Post) {
             res.render('register', 
             { 
                 authenticated: req.session.isAuthenticated, 
+                admin: req.session.admin,
                 title: 'register',
                 action: 'register'
             });
