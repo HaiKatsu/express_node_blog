@@ -97,7 +97,6 @@ module.exports = function(app, session, User, Post) {
     
     //update user password
     app.post('/users/update/:id', async (req, res) => {
-        console.log(req.body);
         if (!req.session.admin)
             res.redirect('/');
         else {
