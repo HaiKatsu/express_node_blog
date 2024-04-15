@@ -55,15 +55,6 @@ app.get('/blog', async (req, res) => {
   });
 });
 
-app.get('/about', async (req, res) => {
-  res.render('about', {
-      authenticated: req.session.isAuthenticated,
-      admin: req.session.admin,
-      title: 'About',
-      action: 'about'
-  });
-});
-
 app.listen(3000, () => {
   console.log('\x1b[1mServer is running on http://localhost:3000\x1b[0m');
 });

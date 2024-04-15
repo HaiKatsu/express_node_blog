@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/button.css">
+<link rel="stylesheet" href="/css/comment_section.css">
 
 <a id="scrollButton" href="#topNav">
     <button class="btn" type="submit" style="position: fixed; top: calc(800px + 20px); right: 75px;">
@@ -13,6 +14,62 @@
         <%- post.content %>
     </div>
 </div>
+<hr style="border-color:black; margin-left:10px">
+
+<% if (authenticated) { %>
+    <div class="form-container" style="margin-left: 200px;">
+        <span class="heading">Leave a comment</span>
+        <form class="form" action="/posts/<%= post.id %>/comments" method="POST">
+            <textarea placeholder="emailUser" id="emailUser" name="emailUser" class="input" value="<%= username %>" style="color: black;" hidden><%= username %></textarea>
+            <textarea placeholder="potsId" id="postId" name='postId' class="input" value="<%= post.id %>" style="color: black;" hidden><%= post.id %></textarea>
+            <textarea placeholder="Say Hello" rows="10" cols="30" id="content" name="content" class="textarea"></textarea>
+            <div class="button-container">
+                <button style="border:none; background-color:transparent">
+                    <div class="button-container">
+                        <div class="reset-button-container">
+                            <div id="reset-btn" class="reset-button">Send</div>
+                        </div>
+                </button>
+            </div>
+            </div>
+        </form>
+    </div>
+<% } else { %>
+    <div class="form-container" style="margin-left: 200px; pointer-events: none;">
+        <p>Please <a href="/login" style="pointer-events: auto; text-decoration: none">login</a> to leave a comment</p>
+        <span class="heading">Leave a comment</span>
+        <div class="form">
+            <textarea placeholder="Say Hello" rows="10" cols="30" id="content" name="content" class="textarea" disabled></textarea>
+            <div class="button-container">
+                <button style="border:none; background-color:transparent">
+                    <div class="button-container">
+                        <div class="reset-button-container">
+                            <div id="reset-btn" class="reset-button">Send</div>
+                        </div>
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<div class="form-container" style="margin-left: 200px; margin-bottom: 100px">
+    <span class="heading" style="font-size: large;">Comments</span>
+    <div class="comment-section">
+        <% comments.forEach((comment, index) => { %>
+            <div class="d-flex flex-row comment-row m-t-0<%= index !== comments.length - 1 ? ' mb-5' : '' %>" style="margin-bottom: 50px">
+                <div class="comment-text w-100;">
+                    <h6 class="font-medium"><%= comment.emailUser %></h6> 
+                    <span class="m-b-15 d-block"><%= comment.content %></span>
+                    <div class="comment-footer"> 
+                        <span class="text-muted float-right"><%= comment.date %></span>
+                    </div>
+                </div>
+            </div>  
+        <% }); %>
+    </div>    
+</div>
+
 
 <style>
     img {

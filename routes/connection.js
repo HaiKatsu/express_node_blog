@@ -35,7 +35,6 @@ module.exports = function(app, session, User, Post) {
         
         
         if (user != null && user.password === password) {
-            console.log("HELLO");
             // Store user information in session
             req.session.isAuthenticated = true;
             req.session.username = username;
@@ -85,5 +84,25 @@ module.exports = function(app, session, User, Post) {
                 res.redirect('/');
             }
         });
+    });
+
+    app.post('/users/:id', async (req, res) => {
+        if (!req.session.admin)
+          res.redirect('/');
+        else {
+          User.destroy({ where: { id: req.body.id } });
+          res.redirect('/dashboard/users');
+        }
+      });
+    
+    //update user password
+    app.post('/users/update/:id', async (req, res) => {
+        console.log(req.body);
+        if (!req.session.admin)
+            res.redirect('/');
+        else {
+            User.update({ password: req.body.password }, { where: { id: req.body.id } });
+            res.redirect('/dashboard/users');
+        }
     });
 }
